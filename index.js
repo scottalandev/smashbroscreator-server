@@ -12,7 +12,7 @@ app.use(express.json());
 // ROUTES
 
   //POST character
-app.post("/chars", async (req, res) => {
+app.post("/api/chars", async (req, res) => {
   try {
     const { name, auth, charObj } = req.body;
     const newChar = await pool.query(
@@ -26,7 +26,7 @@ app.post("/chars", async (req, res) => {
 });
 
   //GET ALL characters
-app.get("/chars", async (req, res) => {
+app.get("/api/chars", async (req, res) => {
   try {
     const allChars = await pool.query(
       "SELECT * FROM chars"
@@ -38,7 +38,7 @@ app.get("/chars", async (req, res) => {
 })
 
   //GET ONE characters
-  app.get("/chars/:id", async (req, res) => {
+  app.get("/api/chars/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const char = await pool.query(
@@ -51,7 +51,7 @@ app.get("/chars", async (req, res) => {
   })
 
   //UPDATE ONE characters
-  app.put("/chars/:id", async (req, res) => {
+  app.put("/api/chars/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const { name, auth, charObj } = req.body;
@@ -65,7 +65,7 @@ app.get("/chars", async (req, res) => {
   })
 
   //DELETE ONE character
-  app.delete("/chars/:id", async (req, res) => {
+  app.delete("/api/chars/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const deleteChar = await pool.query(
@@ -79,7 +79,7 @@ app.get("/chars", async (req, res) => {
 
 // ***************NOT FOR PRODUCTION***************
   //DELETE ALL characters
-  app.delete("/chars/", async (req, res) => {
+  app.delete("/api/chars/", async (req, res) => {
     try {
       const deleteAllChar = await pool.query(
         "TRUNCATE chars"
